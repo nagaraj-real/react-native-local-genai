@@ -3,16 +3,11 @@
 @implementation LocalGenai
 RCT_EXPORT_MODULE()
 
-// Example method
-// See // https://reactnative.dev/docs/native-modules-ios
-RCT_EXPORT_METHOD(multiply:(double)a
-                  b:(double)b
+RCT_EXPORT_METHOD(chatWithLLM:(NSString *)prompt
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
-    NSNumber *result = @(a * b);
-
-    resolve(result);
+    resolve("Not implemented for ios yet !!");
 }
 
 // Don't compile this code when we build for the old architecture.

@@ -1,4 +1,9 @@
 buildscript {
+  ext {
+    agp_version = '8.3.2'
+    agp_version1 = '8.2.0'
+  }
+
   // Buildscript is evaluated before everything else so we can't use getExtOrDefault
   def kotlin_version = rootProject.ext.has("kotlinVersion") ? rootProject.ext.get("kotlinVersion") : project.properties["LocalGenai_kotlinVersion"]
 
@@ -8,7 +13,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:7.2.1"
+    classpath "com.android.tools.build:gradle:$agp_version1"
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
   }
@@ -109,6 +114,7 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation 'com.google.mediapipe:tasks-genai:0.10.11'
 }
 
 if (isNewArchitectureEnabled()) {
