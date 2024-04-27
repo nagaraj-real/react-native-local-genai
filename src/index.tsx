@@ -16,13 +16,13 @@ const LocalGenaiModule = isTurboModuleEnabled
 const LocalGenai = LocalGenaiModule
   ? LocalGenaiModule
   : new Proxy(
-    {},
-    {
-      get() {
-        throw new Error(LINKING_ERROR);
-      },
-    }
-  );
+      {},
+      {
+        get() {
+          throw new Error(LINKING_ERROR);
+        },
+      }
+    );
 
 export function chatWithLLM(prompt: string): Promise<string> {
   return LocalGenai.chatWithLLM(prompt);

@@ -1,7 +1,7 @@
 {
   "name": "react-native-local-genai",
   "version": "0.0.1",
-  "description": "Local generative ai capabilities using mediapipe",
+  "description": "Local generative ai capabilities using mediapipe in react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
@@ -37,7 +37,10 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "genai",
+    "ai",
+    "mediapipe"
   ],
   "repository": {
     "type": "git",
