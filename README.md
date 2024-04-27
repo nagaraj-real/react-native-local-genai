@@ -16,7 +16,7 @@ Use the same path as given below.
 ```sh
 adb shell rm -r /data/local/tmp/llm/
 adb shell mkdir -p /data/local/tmp/llm/
-adb push output_path /data/local/tmp/llm/model_version.bin
+adb push output_path /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 ```
 
 ## Installation
