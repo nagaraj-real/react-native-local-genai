@@ -1,11 +1,12 @@
 # react-native-local-genai
 
 Local generative ai capabilities using google mediapipe.
+
 Non-blocking local LLM inference using quantized models.
 
-Supports only android now. IOS support coming soon !
+Supports only android now. iOS support coming soon !
 
-## Prerequisite
+## Pre-requisites
 
 Download the preferred model in android.
 Checkout out models supported here - https://developers.google.com/mediapipe/solutions/genai/llm_inference#models
