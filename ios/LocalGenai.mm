@@ -7,14 +7,14 @@ RCT_EXPORT_METHOD(chatWithLLM:(NSString *)prompt
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
-    resolve("Not implemented for ios yet !!");
+    resolve(@"Not implemented for ios yet !!");
 }
 
 RCT_EXPORT_METHOD(setModelPath:(NSString *)path
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
-    resolve("Not implemented for ios yet !!");
+    resolve(@"Not implemented for ios yet !!");
 }
 
 // Don't compile this code when we build for the old architecture.
