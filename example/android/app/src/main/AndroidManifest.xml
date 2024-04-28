@@ -21,5 +21,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <uses-library android:name="libOpenCL.so"
+           android:required="false"/>
     </application>
 </manifest>

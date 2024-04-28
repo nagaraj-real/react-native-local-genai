@@ -9,42 +9,47 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 
-class LocalGenaiModule internal constructor(context: ReactApplicationContext) :
-  LocalGenaiSpec(context) {
+class LocalGenaiModule internal constructor(private var context: ReactApplicationContext) :
+    LocalGenaiSpec(context) {
 
-  private val inferenceModel = InferenceModel.getInstance(context)
-  @ReactMethod
-  override fun chatWithLLM(prompt: String, promise: Promise) {
-    Log.d("InferenceModule", "Prompt: $prompt")
-    CoroutineScope(Dispatchers.Default).launch {
-      generateResponse(prompt, promise)
-    }
-  }
-
-  private suspend fun generateResponse(prompt:String, promise: Promise) {
-    try {
-      var output = StringBuilder("")
-      val response = inferenceModel.generateResponseAsync(prompt)
-      inferenceModel.partialResults
-        .collectIndexed { _, (partialResult, done) ->
-          output.append(partialResult)
-          if (done) {
-            promise.resolve(output.toString())
-          }
+    @ReactMethod
+    override fun chatWithLLM(prompt: String, promise: Promise) {
+        Log.d("InferenceModule", "Prompt: $prompt")
+        CoroutineScope(Dispatchers.Default).launch {
+            generateResponse(prompt, promise)
         }
-      promise.resolve(response)
-
-    } catch (e: Exception)
-    {
-      e.message?.let { Log.d("InferenceModule", it) }
-      promise.reject("Error",e)
     }
-  }
-  override fun getName(): String {
-    return NAME
-  }
 
-  companion object {
-    const val NAME = "LocalGenai"
-  }
+    @ReactMethod
+    override fun setModelPath(modelPath: String, promise: Promise) {
+        Log.d("InferenceModule", "modelPath: $modelPath")
+        InferenceModel.updateModelPath(modelPath)
+    }
+
+    private suspend fun generateResponse(prompt:String, promise: Promise) {
+        try {
+            var output = StringBuilder("")
+            val response = InferenceModel.getInstance(context).generateResponseAsync(prompt)
+            InferenceModel.getInstance(context).partialResults
+                .collectIndexed { _, (partialResult, done) ->
+                    output.append(partialResult)
+                    if (done) {
+                        promise.resolve(output.toString())
+                    }
+                }
+            promise.resolve(response)
+
+        } catch (e: Exception)
+        {
+            e.message?.let { Log.d("InferenceModule", it) }
+            promise.reject("Error",e.message)
+        }
+    }
+    override fun getName(): String {
+        return NAME
+    }
+
+    companion object {
+        const val NAME = "LocalGenai"
+    }
 }

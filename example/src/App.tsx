@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
   ScrollView,
@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { chatWithLLM } from 'react-native-local-genai';
+import { chatWithLLM, setModelPath } from 'react-native-local-genai';
 
 import Markdown from 'react-native-markdown-display';
 
@@ -16,6 +16,10 @@ function App(): React.JSX.Element {
   const [query, setQuery] = useState('');
   const [messages, setMessages] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setModelPath('/data/local/tmp/llm/gemma-2b-it-gpu-int4.bin');
+  }, []);
 
   const sendMessage = async () => {
     console.log('Calling prompt!');

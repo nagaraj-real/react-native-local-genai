@@ -27,3 +27,7 @@ const LocalGenai = LocalGenaiModule
 export function chatWithLLM(prompt: string): Promise<string> {
   return LocalGenai.chatWithLLM(prompt);
 }
+
+export function setModelPath(path: string): Promise<string> {
+  return LocalGenai.setModelPath(path);
+}

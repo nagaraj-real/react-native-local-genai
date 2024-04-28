@@ -8,4 +8,6 @@ abstract class LocalGenaiSpec internal constructor(context: ReactApplicationCont
   ReactContextBaseJavaModule(context) {
 
   abstract fun chatWithLLM(prompt: String, promise: Promise)
+
+  abstract fun setModelPath(path: String, promise: Promise)
 }

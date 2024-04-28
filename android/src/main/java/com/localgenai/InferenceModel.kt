@@ -10,7 +10,7 @@ class InferenceModel private constructor(context: Context) {
     private var llmInference: LlmInference
 
     private val modelExists: Boolean
-        get() = File(MODEL_PATH).exists()
+        get() = File(modelPath).exists()
 
     private val _partialResults = MutableSharedFlow<Pair<String, Boolean>>(
         extraBufferCapacity = 1,
@@ -20,11 +20,11 @@ class InferenceModel private constructor(context: Context) {
 
     init {
         if (!modelExists) {
-            throw IllegalArgumentException("Model not found at path: $MODEL_PATH")
+           throw IllegalArgumentException("Model not found at path: $modelPath")
         }
 
         val options = LlmInference.LlmInferenceOptions.builder()
-            .setModelPath(MODEL_PATH)
+            .setModelPath(modelPath)
             .setMaxTokens(1024)
             .setResultListener { partialResult, done ->
                 _partialResults.tryEmit(partialResult to done)
@@ -42,9 +42,10 @@ class InferenceModel private constructor(context: Context) {
         return llmInference.generateResponse(prompt);
     }
 
+    
 
     companion object {
-        private const val MODEL_PATH = "/data/local/tmp/llm/gemma-2b-it-cpu-int4.bin"
+        private var modelPath = "/data/local/tmp/llm/gemma-2b-it-cpu-int4.bin"
         private var instance: InferenceModel? = null
 
         fun getInstance(context: Context): InferenceModel {
@@ -54,5 +55,13 @@ class InferenceModel private constructor(context: Context) {
                 InferenceModel(context).also { instance = it }
             }
         }
+
+        fun updateModelPath(path:String){
+            if(!path.equals(modelPath)){
+                modelPath = path
+                instance = null
+            }
+        }
+
     }
 }
