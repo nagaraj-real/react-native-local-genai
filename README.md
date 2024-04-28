@@ -35,10 +35,15 @@ adb push ./gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 ## Installation
 
 ```sh
-npm install react-native-local-gen-ai
+yarn add react-native-local-gen-ai
 ```
-
 ## Usage
+
+Update **minSdkVersion** to **24** in android/build.gradle file.
+
+Update the model path using  setModelPath.
+
+Invoke chatWithLLM async method to pass prompts
 
 ```js
 import { chatWithLLM, setModelPath } from 'react-native-local-gen-ai';
@@ -50,11 +55,20 @@ useEffect(()=>{
 
 // non-blocking prompting !!
 const response = await chatWithLLM("hello !");
+console.log(response)
+
+// Response
+
+! 👋
+
+I am a large language model, trained by Google. I can talk and answer your questions to the best of my knowledge.
+
+What would you like to talk about today? 😊
 ```
 
 ## GPU inference in Android
 
-For GPU models, add an entry in Application Manifest file to use openCL. 
+For GPU models, add an entry in Application Manifest file (android/app/src/main/AndroidManifest.xml) to use openCL. 
 
 ```xml
     <application>
