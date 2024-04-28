@@ -4,11 +4,11 @@ Local Generative AI capabilities using google mediapipe.
 
 Non-blocking local LLM inference using quantized models.
 
-Supports only android now. iOS support coming soon !
+Supports only Android now. iOS support coming soon !
 
 ## Pre-requisites
 
-These models are large in size and should not be bundled in apk. 
+Generative AI models are large in size and should not be bundled in apk. 
 Ideally in production, the model must be downloaded from server upon user request.
 
 For development, we manually download the preferred model to PC, quantize(if needed) and push to an android debugging device (adb).
@@ -36,6 +36,8 @@ adb push ./gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 
 ```sh
 yarn add react-native-local-gen-ai
+#or
+npm i react-native-local-gen-ai
 ```
 ## Usage
 
@@ -43,7 +45,7 @@ Update **minSdkVersion** to **24** in android/build.gradle file.
 
 Update the model path using  setModelPath.
 
-Invoke chatWithLLM async method to pass prompts
+Invoke chatWithLLM async method with your prompt
 
 ```js
 import { chatWithLLM, setModelPath } from 'react-native-local-gen-ai';
@@ -78,6 +80,18 @@ For GPU models, add an entry in Application Manifest file (android/app/src/main/
     </application>
 ```
 
+## Expo 
+
+Use local app development instead of Expo GO. Rest of the steps remain the same.
+
+More info on Expo local app development can be found here: 
+
+https://docs.expo.dev/guides/local-app-development/
+
+```sh 
+npx expo run:android
+```
+
 
 ## Contributing
 
@@ -91,4 +105,4 @@ MIT
 
 Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
 
-Made using mediapipe under the hood (https://github.com/google/mediapipe)
+Uses [Google Mediapipe](https://github.com/google/mediapipe) under the hood.
