@@ -35,13 +35,13 @@ adb push ./gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 ## Installation
 
 ```sh
-npm install react-native-local-genai
+npm install react-native-local-gen-ai
 ```
 
 ## Usage
 
 ```js
-import { chatWithLLM, setModelPath } from 'react-native-local-genai';
+import { chatWithLLM, setModelPath } from 'react-native-local-gen-ai';
 
 // Set model path
 useEffect(()=>{

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { chatWithLLM, setModelPath } from 'react-native-local-genai';
+import { chatWithLLM, setModelPath } from 'react-native-local-gen-ai';
 
 import Markdown from 'react-native-markdown-display';
 

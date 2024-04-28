@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-local-genai": ["./src/index"]
+      "react-native-local-gen-ai": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
