@@ -7,7 +7,14 @@ RCT_EXPORT_METHOD(chatWithLLM:(NSString *)prompt
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
-    resolve(@"Not implemented for ios yet !!");
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    @try {
+      NSString *reply = [LocalGenai chatWithLLM:prompt];
+      resolve(reply);
+    } @catch (NSError *error) {
+      reject(@"chatWithLLMError", error.localizedDescription, error);
+    }
+  });
 }
 
 RCT_EXPORT_METHOD(setModelPath:(NSString *)path
