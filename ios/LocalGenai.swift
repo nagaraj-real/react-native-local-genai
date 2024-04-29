@@ -6,19 +6,16 @@ import MediaPipeTasksGenAI
 @objc(LocalGenai)
 class LocalGenai: NSObject {
 
-  override init() {
-    model = OnDeviceModel()
-    chat = model.startChat()
-  }
-
+  var model = OnDeviceModel()
+  var chat = model.startChat()
  @objc(chatWithLLM:resolve:reject:)
  func chatWithLLM(prompt: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
      do {
-      try chat.sendMessage(prompt) { message in 
-          resolve(message)
-        }
+          try chat.sendMessage(prompt) { message in 
+              resolve(message)
+            }
      }catch {
-        reject("Error while sending message")
+        reject(@"failure", @"no message returned", nil);
     }
  }
 
@@ -27,7 +24,7 @@ class LocalGenai: NSObject {
      do {
        resolve("done")
      }catch {
-        reject("Error while sending message")
+        reject(@"failure", @"path not set", nil);
     }
  }
 
@@ -36,16 +33,14 @@ class LocalGenai: NSObject {
 
 final class OnDeviceModel {
 
-  private var modelPath:String="gemma-2b-it-cpu-int4"
-
   private var inference: LlmInference! = {
-    let path = Bundle.main.path(forResource: modelPath, ofType: "bin")!
+    let path = Bundle.main.path(forResource: "gemma-2b-it-cpu-int4", ofType: "bin")!
     let llmOptions = LlmInferenceOptions()
-    options.baseOptions.modelPath = modelPath
-    options.maxTokens = 1000
-    options.topk = 40
-    options.temperature = 0.8
-    options.randomSeed = 101
+    llmOptions.baseOptions.modelPath = modelPath
+    llmOptions.maxTokens = 1000
+    llmOptions.topk = 40
+    llmOptions.temperature = 0.8
+    llmOptions.randomSeed = 101
     return LlmInference(options: llmOptions)
   }()
 
