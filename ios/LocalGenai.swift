@@ -6,13 +6,13 @@ import MediaPipeTasksGenAI
 @objc(LocalGenai)
 class LocalGenai: NSObject {
 
-  init() {
+  override init() {
     model = OnDeviceModel()
     chat = model.startChat()
   }
 
  @objc(chatWithLLM:resolve:reject:)
- func chatWithLLM(_ prompt: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
+ func chatWithLLM(prompt: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
      do {
       try chat.sendMessage(prompt) { message in 
           resolve(message)
@@ -23,7 +23,7 @@ class LocalGenai: NSObject {
  }
 
  @objc(setModelPath:resolve:reject:)
- func setModelPath(_ path: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
+ func setModelPath(path: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
      do {
        resolve("done")
      }catch {
