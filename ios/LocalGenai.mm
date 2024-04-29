@@ -1,36 +1,14 @@
 #import "LocalGenai.h"
+#import <React/RCTBridgeModule.h>
 
-@implementation LocalGenai
-RCT_EXPORT_MODULE()
+@interface RCT_EXTERN_MODULE(LocalGenai, NSObject)
 
-RCT_EXPORT_METHOD(chatWithLLM:(NSString *)prompt
+RCT_EXTERN_METHOD(chatWithLLM:(NSString *)prompt
+                  resolve: (RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(setModelPath:(NSString *)path
                   resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)
-{
-   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    @try {
-      NSString *reply = [LocalGenai chatWithLLM:prompt];
-      resolve(reply);
-    } @catch (NSError *error) {
-      reject(@"chatWithLLMError", error.localizedDescription, error);
-    }
-  });
-}
-
-RCT_EXPORT_METHOD(setModelPath:(NSString *)path
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)
-{
-    resolve(@"Not implemented for ios yet !!");
-}
-
-// Don't compile this code when we build for the old architecture.
-#ifdef RCT_NEW_ARCH_ENABLED
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
-{
-    return std::make_shared<facebook::react::NativeLocalGenaiSpecJSI>(params);
-}
-#endif
+                  rejecter:(RCTPromiseRejectBlock)reject)
 
 @end

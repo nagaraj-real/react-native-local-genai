@@ -3,18 +3,32 @@ import Foundation
 import MediaPipeTasksGenAI
 
 
-@objc
-class LocalGenaiModule: NSObject {
+@objc(LocalGenai)
+class LocalGenai: NSObject {
 
   init() {
     model = OnDeviceModel()
     chat = model.startChat()
   }
 
- @objc
- func chatWithLLM(prompt: String) async throws -> String {
-     let reply= try await chat.sendMessage(prompt) 
-     return reply
+ @objc()
+ func chatWithLLM(_ prompt: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
+     do {
+      try chat.sendMessage(prompt) { message in 
+          resolve(message)
+        }
+     }catch {
+        reject("Error while sending message")
+    }
+ }
+
+ @objc()
+ func setModelPath(_ path: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
+     do {
+       resolve("done")
+     }catch {
+        reject("Error while sending message")
+    }
  }
 
 
