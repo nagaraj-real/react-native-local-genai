@@ -4,7 +4,7 @@ Local Generative AI capabilities using google mediapipe.
 
 Non-blocking local LLM inference using quantized models.
 
-Supports only Android now. iOS support coming soon !
+Supports only Android.
 
 ## Pre-requisites
 
@@ -37,11 +37,11 @@ Checkout the below links on how to download and convert models to media pipe com
 For testing in Android, push the downloaded model to a physical device in developer mode using the below commands.
 
 ```sh
+# Clear directory to remove previous models
+adb shell rm -r /data/local/tmp/llm/
+
 # Create directory to save model
 adb shell mkdir -p /data/local/tmp/llm/
-
-# Or clear directory to remove previous models
-adb shell rm -r /data/local/tmp/llm/
 
 adb push ~/Downloads/gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 ```
