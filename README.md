@@ -10,14 +10,27 @@ Supports only Android now. iOS support coming soon !
 
 Generative AI models are large in size and should not be bundled in apk. 
 Ideally in production, the model must be downloaded from server upon user request.
+For development, we manually download the preferred model to PC and push to an android debugging device (adb).
 
-For development, we manually download the preferred model to PC, quantize(if needed) and push to an android debugging device (adb).
+Gemma models compatible with mediapipe format can be downloaded directly from [Kaggle](https://www.kaggle.com/) (no conversion needed)
 
-Checkout the below links on how to download and quantize models
+```bash
+  # Export your Kaggle username and API key
+  # export KAGGLE_USERNAME=
+  # export KAGGLE_KEY=
+
+  curl -L -u $KAGGLE_USERNAME:$KAGGLE_KEY\
+  -o ~/Downloads/model.tar.gz\
+  https://www.kaggle.com/api/v1/models/google/gemma/tfLite/gemma-2b-it-cpu-int4/1/download
+
+  # Extract model
+  tar xf ~/Downloads/model.tar.gz
+```
+
+For other models, they need to be converted/quantized.
+Checkout the below links on how to download and convert models to media pipe compatible format.
  - https://developers.google.com/mediapipe/solutions/genai/llm_inference#models
-
  - https://developers.google.com/mediapipe/solutions/genai/llm_inference/android#model
-
 
 #### Android Inference
 
@@ -29,7 +42,7 @@ adb shell rm -r /data/local/tmp/llm/
 
 adb shell mkdir -p /data/local/tmp/llm/
 
-adb push ./gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
+adb push ~/Downloads/gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 ```
 
 ## Installation
