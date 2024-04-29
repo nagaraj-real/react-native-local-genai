@@ -31,3 +31,13 @@ export function chatWithLLM(prompt: string): Promise<string> {
 export function setModelPath(path: string): Promise<string> {
   return LocalGenai.setModelPath(path);
 }
+
+export function setModelOptions(options: {
+  modelPath?: string;
+  maxTokens?: number;
+  topK?: number;
+  temperature?: number;
+  randomSeed?: number;
+}): Promise<string> {
+  return LocalGenai.setModelOptions(options);
+}

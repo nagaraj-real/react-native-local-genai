@@ -4,6 +4,8 @@ import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
+import com.facebook.react.bridge.ReadableMap
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectIndexed
@@ -21,9 +23,14 @@ class LocalGenaiModule internal constructor(private var context: ReactApplicatio
     }
 
     @ReactMethod
-    override fun setModelPath(modelPath: String, promise: Promise) {
-        Log.d("InferenceModule", "modelPath: $modelPath")
-        InferenceModel.updateModelPath(modelPath)
+    override fun setModelPath(path: String, promise: Promise) {
+        Log.d("InferenceModule", "modelPath: $path")
+        InferenceModel.updateModelPath(path)
+    }
+
+    @ReactMethod
+    override fun setModelOptions(options: ReadableMap, promise: Promise) {
+      InferenceModel.updateModelOptions(options)
     }
 
     private suspend fun generateResponse(prompt:String, promise: Promise) {

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { chatWithLLM, setModelPath } from 'react-native-local-gen-ai';
+import { chatWithLLM, setModelOptions } from 'react-native-local-gen-ai';
 
 import Markdown from 'react-native-markdown-display';
 
@@ -18,7 +18,13 @@ function App(): React.JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setModelPath('/data/local/tmp/llm/gemma-2b-it-gpu-int4.bin');
+    setModelOptions({
+      modelPath: '/data/local/tmp/llm/gemma-2b-it-gpu-int4.bin',
+      randomSeed: 0,
+      topK: 40,
+      temperature: 0.8,
+      maxTokens: 1000,
+    });
   }, []);
 
   const sendMessage = async () => {

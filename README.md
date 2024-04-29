@@ -43,17 +43,10 @@ npm i react-native-local-gen-ai
 
 Update **minSdkVersion** to **24** in android/build.gradle file.
 
-Update the model path using  setModelPath.
+Invoke chatWithLLM async method with your prompt.
 
-Invoke chatWithLLM async method with your prompt
-
-```js
-import { chatWithLLM, setModelPath } from 'react-native-local-gen-ai';
-
-// Set model path
-useEffect(()=>{
-    setModelPath("/data/local/tmp/llm/gemma-2b-it-cpu-int4.bin")
-},[])
+```ts
+import { chatWithLLM } from 'react-native-local-gen-ai';
 
 // non-blocking prompting !!
 const response = await chatWithLLM("hello !");
@@ -68,16 +61,38 @@ I am a large language model, trained by Google. I can talk and answer your quest
 What would you like to talk about today? 😊
 ```
 
+[Optional] Override model options
+
+```ts
+import { setModelOptions } from 'react-native-local-gen-ai'
+
+/* Default model path is set to 
+   /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
+
+   For other model variants, modelPath needs to be 
+   updated before invoking chatWithLLM
+*/
+useEffect(()=>{
+    setModelOptions({
+        modelPath: '/data/local/tmp/llm/gemma-2b-it-gpu-int4.bin',
+        randomSeed: 0, // Default 0
+        topK: 30, // Default 40
+        temperature: 0.7, // Default 0.8
+        maxTokens: 1000 // Default 512
+    });
+},[])
+```
+
 ## GPU inference in Android
 
 For GPU models, add an entry in Application Manifest file (android/app/src/main/AndroidManifest.xml) to use openCL. 
 
 ```xml
-    <application>
-        <!-- Add this for gpu inference -->
-        <uses-library android:name="libOpenCL.so"
-           android:required="false"/>
-    </application>
+<application>
+    <!-- Add this for gpu inference -->
+    <uses-library android:name="libOpenCL.so"
+        android:required="false"/>
+</application>
 ```
 
 ## Expo 
