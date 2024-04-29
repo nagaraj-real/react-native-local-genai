@@ -35,12 +35,12 @@
     "release": "release-it"
   },
   "keywords": [
-    "react-native",
-    "ios",
-    "android",
-    "genai",
     "ai",
-    "mediapipe"
+    "generative",
+    "mediapipe",
+    "react-native",
+    "expo",
+    "gemma"
   ],
   "repository": {
     "type": "git",
