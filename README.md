@@ -43,7 +43,9 @@ adb shell rm -r /data/local/tmp/llm/
 # Create directory to save model
 adb shell mkdir -p /data/local/tmp/llm/
 
-adb push ~/Downloads/gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
+# Push model to device
+cd ~/Downloads
+adb push gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 ```
 
 ## Installation
