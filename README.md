@@ -20,11 +20,11 @@ Gemma models compatible with mediapipe format can be downloaded directly from [K
   # export KAGGLE_KEY=
 
   curl -L -u $KAGGLE_USERNAME:$KAGGLE_KEY\
-  -o ~/Downloads/model.tar.gz\
+  -o ~/Downloads/gemma-2b-it-cpu-int4.tar.gz\
   https://www.kaggle.com/api/v1/models/google/gemma/tfLite/gemma-2b-it-cpu-int4/1/download
 
   # Extract model
-  tar xf ~/Downloads/model.tar.gz
+  tar -xvzf ~/Downloads/gemma-2b-it-cpu-int4.tar.gz -C ~/Downloads
 ```
 
 For other models, they need to be converted/quantized.
@@ -37,10 +37,11 @@ Checkout the below links on how to download and convert models to media pipe com
 For testing in Android, push the downloaded model to a physical device in developer mode using the below commands.
 
 ```sh
-# Remove any previously loaded models
-adb shell rm -r /data/local/tmp/llm/
-
+# Create directory to save model
 adb shell mkdir -p /data/local/tmp/llm/
+
+# Or clear directory to remove previous models
+adb shell rm -r /data/local/tmp/llm/
 
 adb push ~/Downloads/gemma-2b-it-cpu-int4.bin /data/local/tmp/llm/gemma-2b-it-cpu-int4.bin
 ```
