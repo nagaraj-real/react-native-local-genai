@@ -56,7 +56,8 @@ console.log(response)
 
 ! 👋
 
-I am a large language model, trained by Google. I can talk and answer your questions to the best of my knowledge.
+I am a large language model, trained by Google.
+I can talk and answer your questions to the best of my knowledge.
 
 What would you like to talk about today? 😊
 ```
