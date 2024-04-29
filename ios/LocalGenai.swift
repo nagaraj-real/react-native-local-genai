@@ -11,7 +11,7 @@ class LocalGenai: NSObject {
     chat = model.startChat()
   }
 
- @objc()
+ @objc(chatWithLLM:resolve:reject:)
  func chatWithLLM(_ prompt: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
      do {
       try chat.sendMessage(prompt) { message in 
@@ -22,7 +22,7 @@ class LocalGenai: NSObject {
     }
  }
 
- @objc()
+ @objc(setModelPath:resolve:reject:)
  func setModelPath(_ path: String,resolver resolve: @escaping RCTPromiseResolveBlock, rejecter reject: @escaping RCTPromiseRejectBlock) throws -> String {
      do {
        resolve("done")
