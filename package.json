@@ -1,6 +1,6 @@
 {
   "name": "react-native-local-gen-ai",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Local generative ai capabilities using mediapipe in react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
