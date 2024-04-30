@@ -124,6 +124,11 @@ https://docs.expo.dev/guides/local-app-development/
 npx expo run:android
 ```
 
+## Examples
+
+https://github.com/nagaraj-real/expo-chat-llm
+
+https://github.com/nagaraj-real/react-native-local-genai/tree/main/example
 
 ## Contributing
 
